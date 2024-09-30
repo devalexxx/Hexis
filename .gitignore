@@ -1,0 +1,19 @@
+# Xmake
+.xmake/
+build/
+
+# Cmake
+CMakeLists.txt
+cmake-build-debug/
+
+# Neovim
+compile_commmands.json
+
+# VSCode
+.vscode/
+
+# JetBrain
+.idea/
+
+# macOS
+.DS_Store
