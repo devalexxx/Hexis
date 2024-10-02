@@ -47,6 +47,70 @@ namespace Hx
 	template<Arithmetic T, typename Tag>
 	bool operator!=(const Vec<3, T, Tag>& lhs, const Vec<3, T, Tag>& rhs);
 
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Add::value)
+	AddVecRType<3, T, LTag, RTag> operator+(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SAdd::value)
+	Vec<3, T, Tag> operator+(const Vec<3, T, Tag>& lhs, T scalar);
+
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Add::value)
+	Vec<3, T, LTag>& operator+=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SAdd::value)
+	Vec<3, T, Tag>& operator+=(Vec<3, T, Tag>& lhs, T scalar);
+
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Sub::value)
+	SubVecRType<3, T, LTag, RTag> operator-(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SSub::value)
+	Vec<3, T, Tag> operator-(const Vec<3, T, Tag>& lhs, T scalar);
+
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Sub::value)
+	Vec<3, T, LTag>& operator-=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SSub::value)
+	Vec<3, T, Tag>& operator-=(Vec<3, T, Tag>& lhs, T scalar);
+
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Mul::value)
+	MulVecRType<3, T, LTag, RTag> operator*(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SMul::value)
+	Vec<3, T, Tag> operator*(const Vec<3, T, Tag>& lhs, T scalar);
+
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Mul::value)
+	Vec<3, T, LTag>& operator*=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SMul::value)
+	Vec<3, T, Tag>& operator*=(Vec<3, T, Tag>& lhs, T scalar);
+
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Div::value)
+	DivVecRType<3, T, LTag, RTag> operator/(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SDiv::value)
+	Vec<3, T, Tag> operator/(const Vec<3, T, Tag>& lhs, T scalar);
+
+	template<Arithmetic T, typename LTag, typename RTag>
+	requires(VecAdapter<3, T, LTag, RTag>::Div::value)
+	Vec<3, T, LTag>& operator/=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	requires(VecAdapter<3, T, Tag, Tag>::SDiv::value)
+	Vec<3, T, Tag>& operator/=(Vec<3, T, Tag>& lhs, T scalar);
+
 	template<Arithmetic T, typename Tag>
 	std::ostream& operator<<(std::ostream& os, const Vec<3, T, Tag>& vec);
 
