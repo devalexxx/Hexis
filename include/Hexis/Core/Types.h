@@ -33,6 +33,9 @@ namespace Hx
 	template<typename T>
 	concept Arithmetic = std::is_arithmetic_v<T>;
 
+	template<typename From, typename To>
+	concept ConvertibleTo = std::is_convertible_v<From, To>;
+
 }
 
 #endif
