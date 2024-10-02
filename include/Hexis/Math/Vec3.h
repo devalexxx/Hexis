@@ -42,6 +42,12 @@ namespace Hx
 	Vec<3, T, ToTag> VecTagCast(const Vec<3, T, FromTag>& from);
 
 	template<Arithmetic T, typename Tag>
+	bool operator==(const Vec<3, T, Tag>& lhs, const Vec<3, T, Tag>& rhs);
+
+	template<Arithmetic T, typename Tag>
+	bool operator!=(const Vec<3, T, Tag>& lhs, const Vec<3, T, Tag>& rhs);
+
+	template<Arithmetic T, typename Tag>
 	std::ostream& operator<<(std::ostream& os, const Vec<3, T, Tag>& vec);
 
 }

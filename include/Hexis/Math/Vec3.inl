@@ -1,5 +1,6 @@
 
 #include <Hexis/Core/TypeName.h>
+#include <Hexis/Math/FloatingPoint.h>
 
 namespace Hx
 {
@@ -26,6 +27,18 @@ namespace Hx
 	Vec<3, T, ToTag> VecTagCast(const Vec<3, T, FromTag>& from)
 	{
 		return { from.x, from.y, from.z };
+	}
+
+	template<Arithmetic T, typename Tag>
+	bool operator==(const Vec<3, T, Tag>& lhs, const Vec<3, T, Tag>& rhs)
+	{
+		return Equal(lhs.x, rhs.x) && Equal(lhs.y, rhs.y) && Equal(lhs.z, rhs.z);
+	}
+
+	template<Arithmetic T, typename Tag>
+	bool operator!=(const Vec<3, T, Tag>& lhs, const Vec<3, T, Tag>& rhs)
+	{
+		return !(lhs == rhs);
 	}
 
 	template<Arithmetic T, typename Tag>
