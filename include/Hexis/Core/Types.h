@@ -24,6 +24,12 @@ namespace Hx
 	using f32 = float;
 	using f64 = double;
 
+	template<typename A, typename B>
+	concept SameAs = std::is_same_v<A, B>;
+
+	template<typename A, typename B>
+	concept NotSameAs = !std::is_same_v<A, B>;
+
 }
 
 #endif
