@@ -14,6 +14,20 @@ namespace Hx
 		x(x), y(y), z(z)
 	{}
 
+	template<Arithmetic To, Arithmetic From, typename Tag>
+	requires(ConvertibleTo<From, To>)
+	Vec<3, To, Tag> VecTypeCast(const Vec<3, From, Tag>& from)
+	{
+		return { static_cast<To>(from.x), static_cast<To>(from.y), static_cast<To>(from.z) };
+	}
+
+	template<typename ToTag, typename FromTag, Arithmetic T>
+	requires(VecAdapter<3, T, FromTag, ToTag>::Cast::value && NotSameAs<FromTag, ToTag>)
+	Vec<3, T, ToTag> VecTagCast(const Vec<3, T, FromTag>& from)
+	{
+		return { from.x, from.y, from.z };
+	}
+
 	template<Arithmetic T, typename Tag>
 	std::ostream& operator<<(std::ostream& os, const Vec<3, T, Tag>& vec)
 	{

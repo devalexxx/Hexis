@@ -33,6 +33,14 @@ namespace Hx
 	template<Arithmetic T, typename Tag>
 	using Vec3 = Vec<3, T, Tag>;
 
+	template<Arithmetic To, Arithmetic From, typename Tag>
+	requires(ConvertibleTo<From, To>)
+	Vec<3, To, Tag> VecTypeCast(const Vec<3, From, Tag>& from);
+
+	template<typename ToTag, typename FromTag, Arithmetic T>
+	requires(VecAdapter<3, T, FromTag, ToTag>::Cast::value && NotSameAs<FromTag, ToTag>)
+	Vec<3, T, ToTag> VecTagCast(const Vec<3, T, FromTag>& from);
+
 	template<Arithmetic T, typename Tag>
 	std::ostream& operator<<(std::ostream& os, const Vec<3, T, Tag>& vec);
 
