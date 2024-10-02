@@ -14,4 +14,11 @@ namespace Hx
 		x(x), y(y), z(z)
 	{}
 
+	template<Arithmetic T, typename Tag>
+	std::ostream& operator<<(std::ostream& os, const Vec<3, T, Tag>& vec)
+	{
+		os << "Vec<3, " << TypeName<T>() << ", " << TypeName<Tag>() << ">(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
+		return os;
+	}
+
 }
