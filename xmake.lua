@@ -44,3 +44,34 @@ target("Core")
             })
         end
 	end
+
+target("Math")
+	 add_defines("HEXIS_MATH_BUILD")
+
+    if has_config("shared") then
+        set_kind("shared")
+        add_defines("HEXIS_MATH_SHARED")
+    else
+        set_kind("static")
+    end
+
+    add_deps("Core")
+
+    add_includedirs("include/", { public = true })
+	add_headerfiles("include/(Hexis/Math/*.h)", "include/(Hexis/Math/*.inl)")
+    --add_headerfiles("include/(Hexis/Core/**/*.h)")
+
+	add_files("src/Math/*.cpp")
+	-- add_files("src/Core/**/*.cpp")
+
+	if (has_config("unittest")) then 
+		for _, file in ipairs(os.files("test/Math/test_*.cpp")) do
+            add_tests(path.basename(file), {
+                kind = "binary",
+                files = file,
+                languages = "c++23",
+                packages = "doctest",
+                defines = "DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN"
+            })
+        end
+	end
