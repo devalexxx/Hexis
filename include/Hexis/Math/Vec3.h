@@ -7,6 +7,8 @@
 
 #include <Hexis/Math/Vec.h>
 
+#include <ostream>
+
 namespace Hx
 {
 
@@ -30,6 +32,9 @@ namespace Hx
 
 	template<Arithmetic T, typename Tag>
 	using Vec3 = Vec<3, T, Tag>;
+
+	template<Arithmetic T, typename Tag>
+	std::ostream& operator<<(std::ostream& os, const Vec<3, T, Tag>& vec);
 
 }
 
