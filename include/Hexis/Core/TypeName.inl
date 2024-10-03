@@ -3,6 +3,9 @@
 #	include <cxxabi.h>
 #endif
 
+#include <cstdlib>
+#include <typeinfo>
+
 namespace Hx
 {
 

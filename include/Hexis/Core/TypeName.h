@@ -5,6 +5,8 @@
 #ifndef HEXIS_CORE_TYPENAME_H
 #define HEXIS_CORE_TYPENAME_H
 
+#include <string>
+
 namespace Hx
 {
 
