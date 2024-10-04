@@ -59,7 +59,7 @@ target("HXMath")
 
     add_includedirs("include/", { public = true })
 	add_headerfiles("include/(Hexis/Math/*.h)", "include/(Hexis/Math/*.inl)")
-    --add_headerfiles("include/(Hexis/Core/**/*.h)")
+    add_headerfiles("include/(Hexis/Math/**/*.h)", "include/(Hexis/Math/**/*.inl)")
 
 	add_files("src/Math/*.cpp")
 	add_files("src/Math/**/*.cpp")
