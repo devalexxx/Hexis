@@ -4,7 +4,7 @@
 
 #include <Hexis/Math/FloatingPoint.h>
 
-#include <numeric>
+#include <cmath>
 
 namespace Hx
 {
