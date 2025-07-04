@@ -2,8 +2,8 @@
 // Created by Alex on 01/10/2024.
 //
 
-#ifndef HEXIS_MATH_VEC3_H
-#define HEXIS_MATH_VEC3_H
+#ifndef HX_MATH_VEC3_H
+#define HX_MATH_VEC3_H
 
 #include <Hexis/Math/Vector/Operator.h>
 
@@ -37,53 +37,53 @@ namespace Hx
 			f64 x, y, z;
 	};
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Add>
-	R::Type operator+(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Add>
+	typename R::Type operator+(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Add::Scalar>
-	R::Type operator+(const Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Add::Scalar>
+	typename R::Type operator+(const Vec<3, T, Tag>& lhs, T scalar);
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Add>
-	R::Type& operator+=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Add>
+	typename R::Type& operator+=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Add::Scalar>
-	R::Type& operator+=(Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Add::Scalar>
+	typename R::Type& operator+=(Vec<3, T, Tag>& lhs, T scalar);
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Sub>
-	R::Type operator-(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Sub>
+	typename R::Type operator-(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Sub::Scalar>
-	R::Type operator-(const Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Sub::Scalar>
+	typename R::Type operator-(const Vec<3, T, Tag>& lhs, T scalar);
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Sub>
-	R::Type& operator-=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Sub>
+	typename R::Type& operator-=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Sub::Scalar>
-	R::Type& operator-=(Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Sub::Scalar>
+	typename R::Type& operator-=(Vec<3, T, Tag>& lhs, T scalar);
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Mul>
-	R::Type operator*(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Mul>
+	typename R::Type operator*(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Mul::Scalar>
-	R::Type operator*(const Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Mul::Scalar>
+	typename R::Type operator*(const Vec<3, T, Tag>& lhs, T scalar);
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Mul>
-	R::Type& operator*=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Mul>
+	typename R::Type& operator*=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Mul::Scalar>
-	R::Type& operator*=(Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Mul::Scalar>
+	typename R::Type& operator*=(Vec<3, T, Tag>& lhs, T scalar);
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Div>
-	R::Type operator/(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Div>
+	typename R::Type operator/(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Div::Scalar>
-	R::Type operator/(const Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Div::Scalar>
+	typename R::Type operator/(const Vec<3, T, Tag>& lhs, T scalar);
 
-	template<Arithmetic T, typename LTag, typename RTag, typename R = OperatorRType<3, T, LTag, RTag>::Div>
-	R::Type& operator/=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
+	template<Arithmetic T, typename LTag, typename RTag, typename R = typename OperatorRType<3, T, LTag, RTag>::Div>
+	typename R::Type& operator/=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs);
 
-	template<Arithmetic T, typename Tag, typename R = OperatorRType<3, T, Tag, Tag>::Div::Scalar>
-	R::Type& operator/=(Vec<3, T, Tag>& lhs, T scalar);
+	template<Arithmetic T, typename Tag, typename R = typename OperatorRType<3, T, Tag, Tag>::Div::Scalar>
+	typename R::Type& operator/=(Vec<3, T, Tag>& lhs, T scalar);
 
 }
 

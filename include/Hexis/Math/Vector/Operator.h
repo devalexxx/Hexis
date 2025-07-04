@@ -2,8 +2,8 @@
 // Created by Alex on 04/10/2024.
 //
 
-#ifndef HEXIS_MATH_OPERATOR_H
-#define HEXIS_MATH_OPERATOR_H
+#ifndef HX_MATH_OPERATOR_H
+#define HX_MATH_OPERATOR_H
 
 #include <Hexis/Core/Types.h>
 

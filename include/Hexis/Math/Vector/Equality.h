@@ -2,8 +2,8 @@
 // Created by Alex on 04/10/2024.
 //
 
-#ifndef HEXIS_MATH_EQUALITY_H
-#define HEXIS_MATH_EQUALITY_H
+#ifndef HX_MATH_EQUALITY_H
+#define HX_MATH_EQUALITY_H
 
 #include <Hexis/Math/Vector/Vec3.h>
 

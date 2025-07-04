@@ -1,5 +1,4 @@
 
-#include <Hexis/Core/TypeName.h>
 #include <Hexis/Math/FloatingPoint.h>
 
 namespace Hx
@@ -16,19 +15,19 @@ namespace Hx
 	{}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type operator+(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type operator+(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		return { lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z };
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type operator+(const Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type operator+(const Vec<3, T, Tag>& lhs, T scalar)
 	{
 		return { lhs.x + scalar, lhs.y + scalar, lhs.z + scalar };
 	}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type& operator+=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type& operator+=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		lhs.x += rhs.x;
 		lhs.y += rhs.y;
@@ -37,7 +36,7 @@ namespace Hx
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type& operator+=(Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type& operator+=(Vec<3, T, Tag>& lhs, T scalar)
 	{
 		lhs.x += scalar;
 		lhs.y += scalar;
@@ -46,19 +45,19 @@ namespace Hx
 	}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type operator-(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type operator-(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		return { lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z };
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type operator-(const Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type operator-(const Vec<3, T, Tag>& lhs, T scalar)
 	{
 		return { lhs.x - scalar, lhs.y - scalar, lhs.z - scalar };
 	}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type& operator-=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type& operator-=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		lhs.x -= rhs.x;
 		lhs.y -= rhs.y;
@@ -67,7 +66,7 @@ namespace Hx
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type& operator-=(Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type& operator-=(Vec<3, T, Tag>& lhs, T scalar)
 	{
 		lhs.x -= scalar;
 		lhs.y -= scalar;
@@ -76,19 +75,19 @@ namespace Hx
 	}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type operator*(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type operator*(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		return { lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z };
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type operator*(const Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type operator*(const Vec<3, T, Tag>& lhs, T scalar)
 	{
 		return { lhs.x * scalar, lhs.y * scalar, lhs.z * scalar };
 	}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type& operator*=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type& operator*=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		lhs.x *= rhs.x;
 		lhs.y *= rhs.y;
@@ -97,7 +96,7 @@ namespace Hx
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type& operator*=(Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type& operator*=(Vec<3, T, Tag>& lhs, T scalar)
 	{
 		lhs.x *= scalar;
 		lhs.y *= scalar;
@@ -106,19 +105,19 @@ namespace Hx
 	}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type operator/(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type operator/(const Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		return { lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z };
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type operator/(const Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type operator/(const Vec<3, T, Tag>& lhs, T scalar)
 	{
 		return { lhs.x / scalar, lhs.y / scalar, lhs.z / scalar };
 	}
 
 	template<Arithmetic T, typename LTag, typename RTag, typename R>
-	R::Type& operator/=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
+	typename R::Type& operator/=(Vec<3, T, LTag>& lhs, const Vec<3, T, RTag>& rhs)
 	{
 		lhs.x /= rhs.x;
 		lhs.y /= rhs.y;
@@ -127,7 +126,7 @@ namespace Hx
 	}
 
 	template<Arithmetic T, typename Tag, typename R>
-	R::Type& operator/=(Vec<3, T, Tag>& lhs, T scalar)
+	typename R::Type& operator/=(Vec<3, T, Tag>& lhs, T scalar)
 	{
 		lhs.x /= scalar;
 		lhs.y /= scalar;

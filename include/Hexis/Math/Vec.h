@@ -2,8 +2,8 @@
 // Created by Alex on 01/10/2024.
 //
 
-#ifndef HEXIS_MATH_VEC_H
-#define HEXIS_MATH_VEC_H
+#ifndef HX_MATH_VEC_H
+#define HX_MATH_VEC_H
 
 #include <Hexis/Core/Types.h>
 
