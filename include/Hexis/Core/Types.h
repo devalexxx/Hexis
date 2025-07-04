@@ -2,8 +2,8 @@
 // Created by Alex on 30/09/2024.
 //
 
-#ifndef HEXIS_CORE_TYPES_H
-#define HEXIS_CORE_TYPES_H
+#ifndef HX_CORE_TYPES_H
+#define HX_CORE_TYPES_H
 
 #include <cstdint>
 #include <type_traits>

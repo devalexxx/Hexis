@@ -1,4 +1,3 @@
-
 #if defined(__clang__) || defined(__GNUG__)
 #	include <cxxabi.h>
 #endif
