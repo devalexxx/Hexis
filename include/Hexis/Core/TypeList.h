@@ -2,13 +2,11 @@
 // Created by Alex on 30/09/2024.
 //
 
-#ifndef HEXIS_CORE_TYPELIST_H
-#define HEXIS_CORE_TYPELIST_H
+#ifndef HX_CORE_TYPE_LIST_H
+#define HX_CORE_TYPE_LIST_H
 
 #include <Hexis/Core/Common.h>
 #include <Hexis/Core/Types.h>
-
-#include <tuple>
 
 namespace Hx
 {
@@ -24,7 +22,7 @@ namespace Hx
 	}
 
 	template<typename... Ts>
-	struct TypeList
+	struct HX_CORE_API TypeList
 	{
 			static constexpr u64 Size = sizeof...(Ts);
 
@@ -32,7 +30,7 @@ namespace Hx
 			static constexpr u64 IndexOf = Priv::TypeListIndexOf<0, T, TypeList<Ts...>>::value;
 
 			template<u64 N>
-			using TypeAt = Priv::TypeListTypeAt<N, TypeList<Ts...>>::type;
+			using TypeAt = typename Priv::TypeListTypeAt<N, TypeList<Ts...>>::type;
 	};
 
 }

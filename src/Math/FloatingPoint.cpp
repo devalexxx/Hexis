@@ -9,22 +9,22 @@
 namespace Hx
 {
 
-	bool Equal(f32 lhs, f32 rhs, f32 epsilon)
+	bool Equal(const f32 lhs, const f32 rhs, const f32 epsilon)
 	{
-		return abs(lhs - rhs) < epsilon;
+		return std::abs(lhs - rhs) < epsilon;
 	}
 
-	bool Equal(f32 lhs, f32 rhs)
+	bool Equal(const f32 lhs, const f32 rhs)
 	{
 		return Equal(lhs, rhs, std::numeric_limits<f32>::epsilon());
 	}
 
-	bool Equal(f64 lhs, f64 rhs, f64 epsilon)
+	bool Equal(const f64 lhs, const f64 rhs, const f64 epsilon)
 	{
-		return abs(lhs - rhs) < epsilon;
+		return std::abs(lhs - rhs) < epsilon;
 	}
 
-	bool Equal(f64 lhs, f64 rhs)
+	bool Equal(const f64 lhs, const f64 rhs)
 	{
 		return Equal(lhs, rhs, std::numeric_limits<f64>::epsilon());
 	}
