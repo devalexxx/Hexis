@@ -4,8 +4,14 @@
 
 #include <tuple>
 
-namespace Hx::Priv
+namespace Hx::_
 {
+
+	template<u64 N, typename... Ts>
+	struct TypeListTypeAt<N, TypeList<Ts...>>
+	{
+		using type = std::tuple_element_t<N, std::tuple<Ts...>>;
+	};
 
 	template<u64 N, typename T, SameAs<T> C>
 	struct TypeListIndexOf<N, T, TypeList<C>>
@@ -29,10 +35,12 @@ namespace Hx::Priv
 			static constexpr u64 value = TypeListIndexOf<N + 1, T, TypeList<Ts...>>::value;
 	};
 
-	template<u64 N, typename... Ts>
-	struct TypeListTypeAt<N, TypeList<Ts...>>
+	template<typename C, typename T, typename... Rest>
+	constexpr void TypeListApply(C&& cb)
 	{
-			using type = std::tuple_element_t<N, std::tuple<Ts...>>;
-	};
+		cb.template operator()<T>();
+		if constexpr (sizeof...(Rest) > 0)
+			TypeListApply<C, Rest...>(std::forward<C>(cb));
+	}
 
 }
