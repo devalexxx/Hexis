@@ -30,6 +30,9 @@ namespace Hx
 	template<typename A, typename B>
 	concept NotSameAs = !std::is_same_v<A, B>;
 
+	template<typename T>
+	concept Enum = std::is_enum_v<T>;
+
 }
 
 #endif
