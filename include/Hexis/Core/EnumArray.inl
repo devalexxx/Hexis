@@ -2,8 +2,6 @@
 // Created by Alex Clorennec on 05/07/2025.
 //
 
-#include "EnumArray.h"
-
 #include <memory>
 
 namespace Hx
