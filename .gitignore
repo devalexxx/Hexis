@@ -7,10 +7,11 @@ CMakeLists.txt
 cmake-build-debug/
 
 # Neovim
-compile_commmands.json
+compile_commands.json
 
 # VSCode
 .vscode/
+.cache/
 
 # JetBrain
 .idea/

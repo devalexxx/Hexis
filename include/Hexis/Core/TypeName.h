@@ -12,8 +12,8 @@
 namespace Hx
 {
 
-	template<typename T>
-	HX_CORE_API std::string TypeName();
+    template<typename T>
+    std::string TypeName();
 
 }
 

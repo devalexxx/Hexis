@@ -4,4 +4,5 @@
 
 #include "Hexis/Core/TypeList.h"
 
-namespace Hx {}
+namespace Hx
+{}
