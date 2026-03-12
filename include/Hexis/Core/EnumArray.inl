@@ -8,10 +8,16 @@ namespace Hx
 {
 
     template<Enum E, typename T>
+    EnumArray<E, T>::EnumArray() : mData({}) {}
+
+    template<Enum E, typename T>
     EnumArray<E, T>::EnumArray(std::initializer_list<std::pair<E, T>> lst) : mData({})
     {
         for (auto [k, v]: lst) { mData[std::to_underlying(k)] = v; }
     }
+
+    template<Enum E, typename T>
+    EnumArray<E, T>::EnumArray(Container ctn) : mData(std::move(ctn)) {}
 
     template<Enum E, typename T>
     T& EnumArray<E, T>::operator[](E value)
@@ -35,6 +41,18 @@ namespace Hx
     EnumArrayIterator<E, T> EnumArray<E, T>::end()
     {
         return EnumArrayIterator<E, T>(*this, mData.size());
+    }
+
+    template<Enum E, typename T>
+    auto EnumArray<E, T>::GetContainer() -> Container&
+    {
+        return mData;
+    }
+
+    template<Enum E, typename T>
+    auto EnumArray<E, T>::GetContainer() const -> const Container&
+    {
+        return mData;
     }
 
     template<Enum E, typename T>

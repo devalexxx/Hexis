@@ -21,7 +21,11 @@ namespace Hx
     class EnumArray
     {
       public:
+        using Container = std::array<T, std::to_underlying(E::Count)>;
+
+        EnumArray();
         EnumArray(std::initializer_list<std::pair<E, T>> lst);
+        EnumArray(Container ctn);
 
         T&       operator[](E value);
         const T& operator[](E value) const;
@@ -29,8 +33,11 @@ namespace Hx
         EnumArrayIterator<E, T> begin();
         EnumArrayIterator<E, T> end();
 
+        Container&       GetContainer();
+        const Container& GetContainer() const;
+
       private:
-        std::array<T, std::to_underlying(E::Count)> mData;
+        Container mData;
     };
 
     template<Enum E, typename T>
