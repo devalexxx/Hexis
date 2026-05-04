@@ -63,12 +63,12 @@ namespace Hx
         task->onCancel = [this, group = task->GetGroup()] {
             std::lock_guard lock(mMutex);
             --mTaskCountPerGroup[group];
-            --mTaskCount;
+            mTaskCount = mTaskCount - 1;
         };
 
         std::unique_lock lock(mMutex);
         action(task);
-        ++mTaskCount;
+        mTaskCount = mTaskCount + 1;
         ++mTaskCountPerGroup.try_emplace(task->GetGroup(), 0).first->second;
         lock.unlock();
         mCv.notify_one();

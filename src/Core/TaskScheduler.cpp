@@ -41,7 +41,7 @@ namespace Hx
                         (*task)();
                         lock.lock();
                         --mTaskCountPerGroup[group];
-                        --mTaskCount;
+                        mTaskCount = mTaskCount - 1;
                     }
 
                     if (!lock.owns_lock())
