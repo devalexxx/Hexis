@@ -5,6 +5,7 @@
 #include <Hexis/Math/FloatingPoint.h>
 
 #include <cmath>
+#include <limits>
 
 namespace Hx
 {
