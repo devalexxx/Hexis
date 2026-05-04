@@ -115,7 +115,7 @@ namespace Hx
 
         std::deque<std::shared_ptr<TaskCallable>> mTasks;
         std::unordered_map<std::string, size_t>   mTaskCountPerGroup;
-        size_t                                    mTaskCount;
+        volatile size_t                           mTaskCount;
 
         std::vector<std::thread> mWorkers;
         size_t                   mActiveWorkerCount;
