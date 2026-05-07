@@ -31,9 +31,9 @@ namespace Hx
                     if (mFrozen)
                         mSteps--;
 
-                    auto task  = std::move(mTasks.front());
+                    auto task  = std::move(mTasks.top());
                     auto group = task->GetGroup();
-                    mTasks.pop_front();
+                    mTasks.pop();
                     lock.unlock();
 
                     if (task->Accept())

@@ -6,10 +6,11 @@ namespace Hx
 {
 
     template<typename T>
-    Task<T>::Task(std::string group, std::packaged_task<T()> task) :
+    Task<T>::Task(std::string group, const uint32_t priority, std::packaged_task<T()> task) :
         mTask(std::move(task)),
         mState(TaskState::Planned),
-        mGroup(std::move(group))
+        mGroup(std::move(group)),
+        mPriority(priority)
     {
         mFuture = mTask.get_future();
     }
@@ -80,6 +81,19 @@ namespace Hx
     const std::string& Task<T>::GetGroup() const
     {
         return mGroup;
+    }
+
+    template<typename T>
+    uint32_t Task<T>::GetPriority() const
+    {
+        return mPriority;
+    }
+
+    template<typename T>
+    void Task<T>::SetPriority(const uint32_t value)
+    {
+        std::lock_guard lock(mMutex);
+        mPriority = value;
     }
 
     template<typename T>

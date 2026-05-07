@@ -2,6 +2,9 @@
 // Created by Alex Clorennec on 05/08/2025.
 //
 
+#include <algorithm>
+#include <iostream>
+
 namespace Hx
 {
 
@@ -9,13 +12,21 @@ namespace Hx
     TaskScheduler::Inserter<T, F, Args...>::Inserter(TaskScheduler& scheduler, F&& f, Args&&... args) :
         scheduler(scheduler),
         mTask(std::bind(std::forward<F>(f), std::forward<Args>(args)...)),
-        mGroup(DefaultGroup)
+        mGroup(DefaultGroup),
+        mPriority(0)
     {}
 
     template<typename T, typename F, typename... Args>
     auto TaskScheduler::Inserter<T, F, Args...>::SetGroup(std::string group) -> Inserter&
     {
         mGroup = std::move(group);
+        return *this;
+    }
+
+    template<typename T0, typename F, typename... Args>
+    auto TaskScheduler::Inserter<T0, F, Args...>::SetPriority(const uint32_t priority) -> Inserter&
+    {
+        mPriority = std::min(MaxPriority, priority);
         return *this;
     }
 
@@ -35,14 +46,14 @@ namespace Hx
     auto TaskScheduler::Inserter<T, F, Args...>::Enqueue()
     {
         using RType = std::invoke_result_t<F, Args...>;
-        return scheduler.EnqueueTask(std::make_shared<Task<RType>>(std::move(mGroup), std::move(mTask)), T{});
+        return scheduler.EnqueueTask(std::make_shared<Task<RType>>(std::move(mGroup), mPriority, std::move(mTask)), T{});
     }
 
     template<typename T, typename F, typename... Args>
     auto TaskScheduler::Inserter<T, F, Args...>::Execute()
     {
         using RType = std::invoke_result_t<F, Args...>;
-        return scheduler.ExecuteTask(std::make_shared<Task<RType>>(std::move(mGroup), std::move(mTask)), T{});
+        return scheduler.ExecuteTask(std::make_shared<Task<RType>>(std::move(mGroup), mPriority, std::move(mTask)), T{});
     }
 
     template<typename F, typename... Args>
@@ -52,7 +63,7 @@ namespace Hx
     }
 
     template<typename T>
-    auto TaskScheduler::AddTaskInternal(std::shared_ptr<Task<T>>&& task, Action<T>&& action)
+    auto TaskScheduler::AddTaskInternal(std::shared_ptr<Task<T>>&& task)
     {
         if (mJoining || mJoiningGroup.contains(task->GetGroup()))
         {
@@ -67,7 +78,7 @@ namespace Hx
         };
 
         std::unique_lock lock(mMutex);
-        action(task);
+        mTasks.push(task);
         mTaskCount = mTaskCount + 1;
         ++mTaskCountPerGroup.try_emplace(task->GetGroup(), 0).first->second;
         lock.unlock();
@@ -79,18 +90,15 @@ namespace Hx
     template<typename T, typename A>
     auto TaskScheduler::EnqueueTask(std::shared_ptr<Task<T>>&& task, A)
     {
-        return _::TagSpecified<A, T>(
-            AddTaskInternal<T>(std::move(task), [this](auto ptr) { mTasks.emplace_back(std::move(ptr)); })
-        );
+        return _::TagSpecified<A, T>(AddTaskInternal<T>(std::move(task)));
     }
 
     template<typename T, typename A>
     auto TaskScheduler::ExecuteTask(std::shared_ptr<Task<T>>&& task, A)
     {
-        return _::TagSpecified<A, T>(
-            AddTaskInternal<T>(std::move(task), [this](auto ptr) { mTasks.emplace_front(std::move(ptr)); })
-        );
+        if (const auto top = mTasks.top(); top) task->SetPriority(std::max(top->GetPriority() + 1, MaxPriority + 1));
+        else                                    task->SetPriority(MaxPriority + 1);
+        return _::TagSpecified<A, T>(AddTaskInternal<T>(std::move(task)));
     }
-
 
 }

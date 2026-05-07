@@ -134,6 +134,23 @@ TEST_SUITE("Core")
             scheduler.Join();
         }
 
+        SUBCASE("task-priority")
+        {
+            scheduler.Freeze();
+            for (size_t j = 0; j < scheduler.GetWorkerCount(); j++)
+            {
+                scheduler.Insert([] {}).Enqueue();
+            }
+            auto t1 = scheduler.Insert([] {}).SetGroup("priority").SetPriority(30).AsUnique().Enqueue();
+            auto lastTaskCount = scheduler.GetTaskCount();
+            scheduler.Accept();
+            while (scheduler.GetTaskCount() != lastTaskCount - 1) {}
+            CHECK   (scheduler.IsJoined("priority"));
+            CHECK_EQ(scheduler.GetTaskCount(), scheduler.GetWorkerCount());
+            scheduler.Resume();
+            scheduler.Join();
+        }
+
         SUBCASE("task-execute")
         {
             scheduler.Freeze();

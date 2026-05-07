@@ -9,7 +9,7 @@
 #include "Hexis/Core/Task.h"
 #include "Hexis/Core/Types.h"
 
-#include <deque>
+#include <queue>
 #include <string>
 #include <thread>
 #include <unordered_set>
@@ -45,7 +45,9 @@ namespace Hx
         };
     }
 
-    inline constexpr std::string DefaultGroup = "default";
+    inline constexpr std::string DefaultGroup    = "default";
+    inline constexpr uint32_t    DefaultPriority = 0;
+    inline constexpr uint32_t    MaxPriority     = 1000;
 
     class HX_CORE_API TaskScheduler
     {
@@ -91,7 +93,8 @@ namespace Hx
           public:
             Inserter(TaskScheduler& scheduler, F&& f, Args&&... args);
 
-            Inserter& SetGroup(std::string group);
+            Inserter& SetGroup   (std::string group);
+            Inserter& SetPriority(uint32_t priority);
 
             Inserter<AsUniqueTag, F, Args...>& AsUnique();
             Inserter<AsSharedTag, F, Args...>& AsShared();
@@ -103,19 +106,21 @@ namespace Hx
             TaskScheduler& scheduler;
 
             std::packaged_task<std::invoke_result_t<F, Args...>()> mTask;
-            std::string                                            mGroup;
+
+            std::string mGroup;
+            uint32_t    mPriority;
         };
 
         template<typename T>
-        auto AddTaskInternal(std::shared_ptr<Task<T>>&& task, Action<T>&& action);
+        auto AddTaskInternal(std::shared_ptr<Task<T>>&& task);
         template<typename T, typename A>
         auto EnqueueTask(std::shared_ptr<Task<T>>&& task, A);
         template<typename T, typename A>
         auto ExecuteTask(std::shared_ptr<Task<T>>&& task, A);
 
-        std::deque<std::shared_ptr<TaskCallable>> mTasks;
-        std::unordered_map<std::string, size_t>   mTaskCountPerGroup;
-        volatile size_t                           mTaskCount;
+        std::priority_queue<std::shared_ptr<TaskCallable>, std::vector<std::shared_ptr<TaskCallable>>, TaskCallableCompare> mTasks;
+        std::unordered_map<std::string, size_t>            mTaskCountPerGroup;
+        volatile size_t                                    mTaskCount;
 
         std::vector<std::thread> mWorkers;
         size_t                   mActiveWorkerCount;

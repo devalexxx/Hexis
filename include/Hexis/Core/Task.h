@@ -33,19 +33,34 @@ namespace Hx
     {
         virtual const std::string& GetGroup() const = 0;
         virtual TaskState          GetState() const = 0;
-        virtual bool               Accept()         = 0;
+
+        virtual uint32_t GetPriority() const        = 0;
+        virtual void     SetPriority(uint32_t value) = 0;
+
+        virtual bool Accept() = 0;
+    };
+
+    struct TaskCallableCompare
+    {
+        bool operator()(const std::shared_ptr<TaskCallable>& lhs, const std::shared_ptr<TaskCallable>& rhs) const
+        {
+            return std::less()(lhs->GetPriority(), rhs->GetPriority());
+        }
     };
 
     template<typename T>
     class Task final : public TaskCallable
     {
       public:
-        Task(std::string group, std::packaged_task<T()> task);
+        Task(std::string group, uint32_t priority, std::packaged_task<T()> task);
 
         void operator()() override;
 
-        TaskState          GetState() const override;
         const std::string& GetGroup() const override;
+        TaskState          GetState() const override;
+
+        uint32_t GetPriority() const override;
+        void     SetPriority(uint32_t value) override;
 
         std::future<T>*       GetResult();
         std::shared_future<T> GetSharedResult();
@@ -62,6 +77,7 @@ namespace Hx
 
         TaskState   mState;
         std::string mGroup;
+        uint32_t    mPriority;
         std::mutex  mMutex;
     };
 
