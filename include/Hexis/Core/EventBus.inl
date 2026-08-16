@@ -41,7 +41,7 @@ namespace Hx
     }
 
     template<typename T, typename F, typename... Args>
-    EventHandlerRef<T> EventBus::Subscribe(F&& f, Args&&... args)
+    EventHandlerRef<T> EventBus::Subscribe(F&& f, Args&&... args) const
     {
         auto hash  = Hash<Type<T>, FNV1a64>{}();
         auto bound = std::bind(std::forward<F>(f), std::placeholders::_1, std::forward<Args>(args)...);
@@ -71,7 +71,7 @@ namespace Hx
     }
 
     template<typename T>
-    void EventBus::Withdraw(EventHandlerRef<T> ref)
+    void EventBus::Withdraw(EventHandlerRef<T> ref) const
     {
         if (ref.index < 0)
             return;

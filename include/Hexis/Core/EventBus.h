@@ -38,9 +38,9 @@ namespace Hx
         template<typename T> void Enqueue(T&& event);
 
         template<typename T, typename F, typename... Args>
-        EventHandlerRef<T> Subscribe(F&& f, Args&&... args);
+        EventHandlerRef<T> Subscribe(F&& f, Args&&... args) const;
         template<typename T>
-        void Withdraw(EventHandlerRef<T> ref);
+        void Withdraw(EventHandlerRef<T> ref) const;
 
         void Poll();
 
@@ -53,8 +53,8 @@ namespace Hx
             void operator()(const IEvent& event);
         };
 
-        std::unordered_map<i64, EventHandler<IEvent>> mEventHandlerMap;
-        std::queue<EventEmitter>                      mEventEmitterQueue; // TODO: use concurrent queue
+        mutable std::unordered_map<i64, EventHandler<IEvent>> mEventHandlerMap;
+        std::queue<EventEmitter> mEventEmitterQueue; // TODO: use concurrent queue
     };
 
 }
