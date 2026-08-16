@@ -33,6 +33,9 @@ namespace Hx
     template<typename T>
     concept Enum = std::is_enum_v<T>;
 
+    template<typename T>
+    concept MemberFuncPtr = std::is_member_function_pointer_v<std::decay_t<T>>;
+
 }
 
 #endif

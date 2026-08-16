@@ -10,6 +10,7 @@
 
 #include <queue>
 #include <functional>
+#include <type_traits>
 
 namespace Hx
 {
@@ -39,6 +40,11 @@ namespace Hx
 
         template<typename T, typename F, typename... Args>
         EventHandlerRef<T> Subscribe(F&& f, Args&&... args) const;
+        template<typename T, MemberFuncPtr M, typename C, typename... Args>
+        EventHandlerRef<T> Subscribe(M method, C* instance, Args&&... args) const;
+        template<typename T, MemberFuncPtr M, typename C, typename... Args>
+        EventHandlerRef<T> Subscribe(M method, C& instance, Args&&... args) const;
+
         template<typename T>
         void Withdraw(EventHandlerRef<T> ref) const;
 

@@ -70,6 +70,23 @@ namespace Hx
         return EventHandlerRef<T> { index };
     }
 
+    template<typename T, MemberFuncPtr M, typename C, typename... Args>
+    EventHandlerRef<T> EventBus::Subscribe(M method, C* instance, Args&&... args) const
+    {
+        auto bound = [method, instance, ... args = std::forward<Args>(args)](const T& event) mutable
+        {
+            std::invoke(method, instance, event, args...);
+        };
+
+        return Subscribe<T>(std::move(bound));
+    }
+
+    template<typename T, MemberFuncPtr M, typename C, typename... Args>
+    EventHandlerRef<T> EventBus::Subscribe(M method, C& instance, Args&&... args) const
+    {
+        return Subscribe<T>(method, &instance, std::forward<Args>(args)...);
+    }
+
     template<typename T>
     void EventBus::Withdraw(EventHandlerRef<T> ref) const
     {
