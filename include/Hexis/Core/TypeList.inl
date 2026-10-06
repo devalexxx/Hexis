@@ -43,4 +43,10 @@ namespace Hx::_
             TypeListApply<C, Rest...>(std::forward<C>(cb));
     }
 
+    template<typename... Lhs, typename... Rhs>
+    struct TypeListConcat<TypeList<Lhs...>, TypeList<Rhs...>>
+    {
+        using type = TypeList<Lhs..., Rhs...>;
+    };
+
 }

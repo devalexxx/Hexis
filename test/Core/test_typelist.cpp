@@ -40,5 +40,17 @@ TEST_SUITE("Core")
             using TL1 = TypeList<T1, T2>;
             TL1::Apply<Functor<TL1>>({});
         }
+
+        SUBCASE("Concat")
+        {
+            using TL1 = TypeList<T1, T3>;
+            using TL2 = TypeList<T2, T4>;
+
+            using TL3 = TypeListConcat<TL1, TL2>;
+            CHECK(std::is_same_v<TL3::TypeAt<0>, T1>);
+            CHECK(std::is_same_v<TL3::TypeAt<1>, T3>);
+            CHECK(std::is_same_v<TL3::TypeAt<2>, T2>);
+            CHECK(std::is_same_v<TL3::TypeAt<3>, T4>);
+        }
     }
 }

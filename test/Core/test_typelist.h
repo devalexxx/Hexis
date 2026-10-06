@@ -15,6 +15,16 @@ struct T2
     static constexpr Hx::u64 index = 1;
 };
 
+struct T3
+{
+    static constexpr Hx::u64 index = 2;
+};
+
+struct T4
+{
+    static constexpr Hx::u64 index = 3;
+};
+
 template<typename TL>
 struct Functor
 {

@@ -21,6 +21,9 @@ namespace Hx
 
         template<typename C, typename T, typename... Rest>
         static constexpr void TypeListApply(C&& cb);
+
+        template<typename, typename>
+        struct TypeListConcat;
     }
 
     template<typename... Ts>
@@ -37,6 +40,10 @@ namespace Hx
         template<typename C>
         static constexpr auto Apply = _::TypeListApply<C, Ts...>;
     };
+
+    template<typename Lhs, typename Rhs>
+    using TypeListConcat = _::TypeListConcat<Lhs, Rhs>::type;
+
 
 }
 
