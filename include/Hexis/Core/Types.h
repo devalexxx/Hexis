@@ -24,6 +24,19 @@ namespace Hx
     using f32 = float;
     using f64 = double;
 
+    using UInt8  = u8;
+    using UInt16 = u16;
+    using UInt32 = u32;
+    using UInt64 = u64;
+
+    using Int8  = i8;
+    using Int16 = i16;
+    using Int32 = i32;
+    using Int64 = i64;
+
+    using Float32 = f32;
+    using Float64 = f64;
+
     template<typename A, typename B>
     concept SameAs = std::is_same_v<A, B>;
 
